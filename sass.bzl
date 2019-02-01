@@ -19,12 +19,10 @@ def _sass_binaries_impl(ctx):
   args.add([root + ":" + root])
   # args.add("--load-path", root)
 
-
   ctx.actions.run(
     inputs = inputs,
     outputs = outputs,
     executable = ctx.attr._compiler.files.to_list()[0],
-    # executable = ctx.attr._compiler.fi
     arguments = [args],
     mnemonic = "CompileSass",
     progress_message = "Compiling Sass stylesheets",
