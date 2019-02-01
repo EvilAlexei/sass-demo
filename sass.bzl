@@ -16,13 +16,13 @@ def _sass_binaries_impl(ctx):
 
   args = ctx.actions.args()
   args.add("--no-source-map")
-  args.add([root + ":" + root])
-  # args.add("--load-path", root)
+  args.add([root + ":" + ctx.bin_dir.path + '/' + root])
+  args.add("--load-path", root)
 
   ctx.actions.run(
     inputs = inputs,
     outputs = outputs,
-    executable = ctx.attr._compiler.files.to_list()[0],
+    executable = ctx.executable._compiler,
     arguments = [args],
     mnemonic = "CompileSass",
     progress_message = "Compiling Sass stylesheets",
@@ -38,8 +38,7 @@ sass_binaries = rule(
       allow_empty = False,
     ),
     "_compiler": attr.label(
-      default = Label("@npm//node_modules/sass:sass.js"),
-      allow_single_file = True,
+      default = Label("@npm//node_modules/sass:sass__bin"),
       executable = True,
       cfg = "target",
     ),
