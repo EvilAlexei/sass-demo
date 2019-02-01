@@ -27,7 +27,7 @@ http_archive(
 )
 
 # The @angular repo contains rule for building Angular applications
-ANGULAR_VERSION = "7.2.0"
+ANGULAR_VERSION = "7.2.3"
 http_archive(
     name = "angular",
     url = "https://github.com/angular/angular/archive/%s.zip" % ANGULAR_VERSION,

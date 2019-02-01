@@ -11,7 +11,7 @@ build --strategy=AngularTemplateCompile=worker
 #
 # Instead, the output will appear in `dist/bin`. You'll need to ignore the
 # `bazel-out` directory that is created in the workspace root.
-build --symlink_prefix=dist/
+build --symlink_prefix=dist/ --subcommands
 
 test --test_output=errors
 
