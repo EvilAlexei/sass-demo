@@ -1,18 +1,17 @@
 SassDataInfo = provider()
 
 def _sass_binaries_impl(ctx):
-  print(ctx.attr.srcs)
+  """
+  Perform a global compilation of all .scss files with a single invocation of
+  the Sass compiler.
+  """
 
   root = ctx.attr.srcs[0].label.package + "/"
-  print("root: ", root)
-
   inputs = depset([f for t in ctx.attr.srcs for f in t.files])
-  print(inputs)
   outputs = [ctx.actions.declare_file(
     f.basename.replace(".scss", ".css"),
     sibling = f,
   ) for f in inputs]
-  print(outputs)
 
   args = ctx.actions.args()
   args.add("--no-source-map")
@@ -43,5 +42,4 @@ sass_binaries = rule(
       cfg = "target",
     ),
   },
-
 )
